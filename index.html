@@ -3,123 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10101b">
-  <title>GameForge Creator — Build your next world</title>
+  <title>GameForge Creator</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <a class="brand" href="#" aria-label="GameForge Creator home">
-        <span class="brand-mark">✦</span><span>GameForge <b>Creator</b></span>
-      </a>
-      <div class="workspace-label">WORKSPACE</div>
-      <nav class="nav">
-        <a class="nav-item active" href="#dashboard"><span>◫</span> Dashboard</a>
-        <a class="nav-item" href="#my-games"><span>▣</span> My games <span class="nav-count" id="gameCount">0</span></a>
-        <a class="nav-item" href="#templates"><span>✧</span> Templates</a>
-        <a class="nav-item" href="#assets"><span>◇</span> Asset library</a>
-      </nav>
-      <div class="sidebar-bottom">
-        <div class="upgrade-card">
-          <div class="upgrade-icon">✦</div>
-          <strong>Unleash your ideas</strong>
-          <p>Premium tools are coming soon. Start creating for free.</p>
-          <button class="button button-light button-small" id="learnMore">Explore plans <span>↗</span></button>
-        </div>
-        <div class="profile">
-          <div class="avatar">G</div>
-          <div><strong>GameForge User</strong><small>Free workspace</small></div>
-          <span class="profile-dots">•••</span>
-        </div>
-      </div>
-    </aside>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">G</span> GameForge <span class="muted">Creator</span></a>
+    <button class="button button-primary" id="topCreate">+ Create Project</button>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">YOUR CREATIVE WORKSPACE</p>
+      <h1>Bring your game ideas <span>to life.</span></h1>
+      <p class="hero-copy">Start a project, choose a template, and build something amazing.</p>
+      <button class="button button-primary button-large" id="heroCreate">＋ Create your first game</button>
+    </section>
+    <section class="section-heading">
+      <div><p class="eyebrow">WORKSPACE</p><h2>Your projects</h2></div>
+      <button class="button button-secondary" id="newProject">+ New project</button>
+    </section>
+    <section class="project-grid" id="projectGrid">
+      <article class="project-card template-card">
+        <div class="tile tile-purple">✦</div><h3>Adventure Game</h3>
+        <p>Explore worlds and go on quests.</p>
+        <button class="button button-secondary template-button" data-template="Adventure Game">Use template</button>
+      </article>
+      <article class="project-card template-card">
+        <div class="tile tile-blue">⚡</div><h3>Arcade Game</h3>
+        <p>Fast action and high scores.</p>
+        <button class="button button-secondary template-button" data-template="Arcade Game">Use template</button>
+      </article>
+      <article class="project-card template-card">
+        <div class="tile tile-pink">◈</div><h3>Puzzle Game</h3>
+        <p>Challenges that make players think.</p>
+        <button class="button button-secondary template-button" data-template="Puzzle Game">Use template</button>
+      </article>
+    </section>
+    <p class="note">Starter version: your demo projects are saved in this browser on this device.</p>
+  </main>
 
-    <main class="main" id="dashboard">
-      <header class="topbar">
-        <div class="mobile-brand"><span class="brand-mark">✦</span> GameForge Creator</div>
-        <div class="breadcrumb">Workspace <span>/</span> <b>Dashboard</b></div>
-        <div class="top-actions">
-          <button class="icon-button" title="Notifications" aria-label="Notifications">♧</button>
-          <div class="top-avatar">G</div>
-        </div>
-      </header>
-
-      <section class="welcome">
-        <div>
-          <div class="eyebrow"><span class="sparkle">✦</span> YOUR CREATIVE WORKSPACE</div>
-          <h1>Make something<br><span>legendary.</span></h1>
-          <p class="welcome-copy">Your next great game starts with an idea. Bring it to life, one step at a time.</p>
-          <button class="button button-primary" id="createTop"><span>＋</span> Create a new game <span class="button-arrow">→</span></button>
-        </div>
-        <div class="hero-art" aria-label="Abstract neon game world illustration">
-          <div class="orb orb-one"></div><div class="orb orb-two"></div>
-          <div class="planet"><div class="planet-ring"></div><div class="planet-core">✦</div></div>
-          <div class="float-card float-card-one"><span class="mini-icon purple">◈</span><div><b>Ideas to worlds</b><small>Start creating</small></div></div>
-          <div class="float-card float-card-two"><span class="mini-icon orange">⚡</span><div><b>Your imagination</b><small>Has no limits</small></div></div>
-          <div class="star star-a">✦</div><div class="star star-b">✧</div><div class="star star-c">·</div>
-        </div>
-      </section>
-
-      <section class="stats">
-        <div class="stat-card"><div class="stat-icon violet">▣</div><div><span>Your games</span><strong id="statGames">0</strong></div><small class="stat-note">Keep building</small></div>
-        <div class="stat-card"><div class="stat-icon blue">✧</div><div><span>Templates</span><strong>6</strong></div><small class="stat-note">Ready to explore</small></div>
-        <div class="stat-card"><div class="stat-icon green">↗</div><div><span>Workspace</span><strong>Ready</strong></div><small class="stat-note">Your next idea awaits</small></div>
-      </section>
-
-      <section class="section" id="my-games">
-        <div class="section-heading"><div><h2>Pick up where you left off</h2><p>Your projects will appear here as you create them.</p></div><button class="text-button" id="viewAll">View all <span>→</span></button></div>
-        <div class="empty-state" id="emptyState">
-          <div class="empty-illustration"><div class="empty-window"><span></span><span></span><span></span><div class="empty-shape">✦</div></div></div>
-          <h3>Your first game is waiting</h3>
-          <p>Choose a template or start with a blank project. There’s no wrong place to begin.</p>
-          <button class="button button-secondary" id="emptyCreate">＋ Start your first game</button>
-        </div>
-        <div class="games-grid" id="gamesGrid"></div>
-      </section>
-
-      <section class="section templates-section" id="templates">
-        <div class="section-heading"><div><h2>Start with a template</h2><p>A little inspiration can go a long way.</p></div><button class="text-button" id="allTemplates">Browse templates <span>→</span></button></div>
-        <div class="template-grid">
-          <button class="template-card" data-template="Neon Runner"><div class="template-art art-runner"><div class="art-moon"></div><div class="art-road"></div><div class="art-person">◆</div><span class="art-tag">ARCADE</span></div><div class="template-info"><div><h3>Neon Runner</h3><p>Fast-paced arcade</p></div><span class="template-arrow">↗</span></div></button>
-          <button class="template-card" data-template="Mystic Quest"><div class="template-art art-quest"><div class="quest-sun"></div><div class="quest-mountain"></div><div class="quest-mountain second"></div><span class="art-tag">ADVENTURE</span></div><div class="template-info"><div><h3>Mystic Quest</h3><p>Explore a fantasy world</p></div><span class="template-arrow">↗</span></div></button>
-          <button class="template-card" data-template="Pixel Builder"><div class="template-art art-pixel"><div class="pixel-cloud"></div><div class="pixel-block block-one"></div><div class="pixel-block block-two"></div><div class="pixel-block block-three"></div><span class="art-tag">SANDBOX</span></div><div class="template-info"><div><h3>Pixel Builder</h3><p>Build your own world</p></div><span class="template-arrow">↗</span></div></button>
-        </div>
-      </section>
-
-      <footer><span class="footer-mark">✦</span> GameForge Creator <span class="footer-separator">·</span> Made for imagination <span class="footer-right">Your next world starts here.</span></footer>
-    </main>
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close-button" id="closeModal" aria-label="Close">×</button>
+      <p class="eyebrow">NEW PROJECT</p>
+      <h2 id="modalTitle">Create a game project</h2>
+      <form id="projectForm">
+        <label for="projectName">Game name</label>
+        <input id="projectName" name="projectName" placeholder="My awesome game" required maxlength="60">
+        <label for="projectType">Choose a starting template</label>
+        <select id="projectType" name="projectType">
+          <option>Blank Project</option><option>Adventure Game</option><option>Arcade Game</option><option>Puzzle Game</option>
+        </select>
+        <p id="formError" class="form-error" hidden>Please enter a game name.</p>
+        <button class="button button-primary button-large full-width" type="submit">Create project</button>
+      </form>
+    </section>
   </div>
-
-  <dialog id="createDialog" class="modal">
-    <form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Close">×</button></form>
-    <div class="modal-symbol">✦</div>
-    <div class="eyebrow">NEW PROJECT</div>
-    <h2>What will you create?</h2>
-    <p>Give your next game a name. You can change it later.</p>
-    <form id="createForm">
-      <label for="gameName">Game name</label>
-      <input id="gameName" name="gameName" maxlength="48" placeholder="e.g. Starfall Adventure" required>
-      <label for="gameType">Starting point</label>
-      <select id="gameType" name="gameType">
-        <option value="Blank project">Blank project</option>
-        <option value="Neon Runner">Neon Runner template</option>
-        <option value="Mystic Quest">Mystic Quest template</option>
-        <option value="Pixel Builder">Pixel Builder template</option>
-      </select>
-      <button class="button button-primary modal-submit" type="submit">Create project <span>→</span></button>
-    </form>
-    <small class="modal-note">Demo interface: projects are saved in this browser only.</small>
-  </dialog>
-
-  <dialog id="infoDialog" class="modal info-modal">
-    <form method="dialog" class="modal-close-form"><button class="modal-close" aria-label="Close">×</button></form>
-    <div class="modal-symbol">✦</div><div class="eyebrow">COMING SOON</div>
-    <h2>Your creator journey</h2>
-    <p>This starter version gives GameForge Creator a modern dashboard and working demo interactions. Real game editing, accounts, cloud saving, and payments need to be connected separately.</p>
-    <button class="button button-primary" id="infoOkay">Got it</button>
-  </dialog>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="app.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 </body>
 </html>
