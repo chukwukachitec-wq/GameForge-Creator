@@ -3,63 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GameForge Creator</title>
+  <title>GameForge Creator — 3D Studio</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="app.js" defer></script>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#"><span class="brand-mark">G</span> GameForge <span class="muted">Creator</span></a>
-    <button class="button button-primary" id="topCreate">+ Create Project</button>
+    <a class="brand" href="#"><span class="brand-mark">G</span><span>GameForge <em>Creator</em></span></a>
+    <div class="top-actions"><span class="save-status" id="saveStatus">● Ready</span><button class="btn btn-quiet" id="saveBtn">Save</button><button class="btn btn-primary" id="playBtn">▶ Play preview</button></div>
   </header>
-  <main class="container">
-    <section class="hero">
-      <p class="eyebrow">YOUR CREATIVE WORKSPACE</p>
-      <h1>Bring your game ideas <span>to life.</span></h1>
-      <p class="hero-copy">Start a project, choose a template, and build something amazing.</p>
-      <button class="button button-primary button-large" id="heroCreate">＋ Create your first game</button>
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="side-title">YOUR STUDIO</div>
+      <button class="nav-item active" data-mode="world"><span>◇</span> World Builder</button>
+      <button class="nav-item" data-mode="adventure"><span>♙</span> Adventure Game</button>
+      <button class="nav-item" data-mode="racing"><span>▰</span> Racing Game</button>
+      <div class="side-divider"></div>
+      <div class="side-title">SCENE OBJECTS</div>
+      <div id="objectList" class="object-list"><p class="empty-list">Your objects will appear here.</p></div>
+      <div class="sidebar-bottom"><div class="mini-icon">✦</div><div><strong>GameForge 3D</strong><small>Starter studio</small></div></div>
+    </aside>
+    <section class="editor">
+      <div class="editor-head">
+        <div><p class="eyebrow">3D GAME STUDIO</p><h1 id="modeTitle">World Builder</h1><p id="modeDescription">Place objects and shape your own 3D world.</p></div>
+        <div class="mode-chip"><span class="live-dot"></span> 3D workspace</div>
+      </div>
+      <div class="viewport-wrap">
+        <div class="viewport-toolbar"><span><i class="tiny-dot"></i> SCENE VIEW</span><div><button class="tool-btn" id="resetCamera" title="Reset camera">◎ Reset view</button><button class="tool-btn" id="clearBtn" title="Clear added objects">Clear objects</button></div></div>
+        <div id="viewport" aria-label="Interactive 3D scene"></div>
+        <div class="view-help" id="viewHelp">Drag to orbit · Scroll to zoom · Tap an object to select it</div>
+        <div class="preview-banner" id="previewBanner" hidden>Preview mode — press “Stop preview” to edit again</div>
+      </div>
+      <div class="bottom-bar"><span><span class="live-dot"></span> Scene ready</span><span id="objectCount">0 objects added</span><span>Tip: choose an object below to add it</span></div>
     </section>
-    <section class="section-heading">
-      <div><p class="eyebrow">WORKSPACE</p><h2>Your projects</h2></div>
-      <button class="button button-secondary" id="newProject">+ New project</button>
-    </section>
-    <section class="project-grid" id="projectGrid">
-      <article class="project-card template-card">
-        <div class="tile tile-purple">✦</div><h3>Adventure Game</h3>
-        <p>Explore worlds and go on quests.</p>
-        <button class="button button-secondary template-button" data-template="Adventure Game">Use template</button>
-      </article>
-      <article class="project-card template-card">
-        <div class="tile tile-blue">⚡</div><h3>Arcade Game</h3>
-        <p>Fast action and high scores.</p>
-        <button class="button button-secondary template-button" data-template="Arcade Game">Use template</button>
-      </article>
-      <article class="project-card template-card">
-        <div class="tile tile-pink">◈</div><h3>Puzzle Game</h3>
-        <p>Challenges that make players think.</p>
-        <button class="button button-secondary template-button" data-template="Puzzle Game">Use template</button>
-      </article>
-    </section>
-    <p class="note">Starter version: your demo projects are saved in this browser on this device.</p>
+    <aside class="inspector">
+      <div class="panel-heading"><div><p class="eyebrow">BUILD TOOLS</p><h2>Add to world</h2></div><span class="plus-badge">+</span></div>
+      <p class="panel-copy">Pick an object to place it in your 3D scene.</p>
+      <div class="add-grid">
+        <button class="add-card" data-object="cube"><span class="object-icon cube-icon">▧</span><strong>Block</strong><small>Basic shape</small></button>
+        <button class="add-card" data-object="tree"><span class="object-icon tree-icon">♣</span><strong>Tree</strong><small>Nature</small></button>
+        <button class="add-card" data-object="rock"><span class="object-icon rock-icon">◆</span><strong>Rock</strong><small>Obstacle</small></button>
+        <button class="add-card" data-object="coin"><span class="object-icon coin-icon">●</span><strong>Coin</strong><small>Collectible</small></button>
+        <button class="add-card" data-object="car"><span class="object-icon car-icon">▰</span><strong>Car</strong><small>Racing</small></button>
+        <button class="add-card" data-object="player"><span class="object-icon player-icon">♙</span><strong>Player</strong><small>Character</small></button>
+      </div>
+      <div class="side-divider"></div>
+      <div class="panel-heading"><div><p class="eyebrow">SELECTED ITEM</p><h2 id="selectedName">Nothing selected</h2></div></div>
+      <p class="panel-copy" id="selectedHint">Tap an object in the scene or add a new one.</p>
+      <div class="move-controls">
+        <button class="move-btn" data-move="z-">↑<small>Forward</small></button>
+        <div class="move-row"><button class="move-btn" data-move="x-">←<small>Left</small></button><button class="move-btn" data-move="x+">→<small>Right</small></button></div>
+        <button class="move-btn" data-move="z+">↓<small>Back</small></button>
+      </div>
+      <button class="btn btn-danger" id="deleteBtn" disabled>Delete selected object</button>
+      <div class="hint-card"><span>💡</span><p><strong>How to build</strong><br>Choose a game type, add objects, tap an object to select it, then use the arrows to move it around.</p></div>
+    </aside>
   </main>
-
-  <div class="modal-backdrop" id="modalBackdrop" hidden>
-    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="close-button" id="closeModal" aria-label="Close">×</button>
-      <p class="eyebrow">NEW PROJECT</p>
-      <h2 id="modalTitle">Create a game project</h2>
-      <form id="projectForm">
-        <label for="projectName">Game name</label>
-        <input id="projectName" name="projectName" placeholder="My awesome game" required maxlength="60">
-        <label for="projectType">Choose a starting template</label>
-        <select id="projectType" name="projectType">
-          <option>Blank Project</option><option>Adventure Game</option><option>Arcade Game</option><option>Puzzle Game</option>
-        </select>
-        <p id="formError" class="form-error" hidden>Please enter a game name.</p>
-        <button class="button button-primary button-large full-width" type="submit">Create project</button>
-      </form>
-    </section>
-  </div>
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <div class="toast" id="toast" hidden></div>
 </body>
 </html>

@@ -1,16 +1,15 @@
-# GameForge Creator — refreshed starter
+# GameForge Creator — All-in-one 3D starter
 
-## Files
-- `index.html` — page structure
-- `styles.css` — dark/purple responsive design
-- `app.js` — working create-project modal and demo project saving
-- `README.md` — these instructions
+This version includes three starter modes:
+- **World Builder:** add and move objects in a 3D scene.
+- **Adventure Game:** create a scene with a player, trees, rocks, and coins.
+- **Racing Game:** add cars and obstacles.
 
-## Upload to GitHub
-1. Open your GameForge Creator repository.
-2. Choose **Add file → Upload files**.
-3. Upload `index.html`, `styles.css`, and `app.js` from this folder to the repository's main/root folder.
-4. If GitHub asks whether to replace the old `index.html` or `styles.css`, replace those files with these versions.
-5. Commit the changes. Keep your existing server/backend files; do not delete them.
+## Upload
+1. Extract this ZIP.
+2. In your GitHub repository, choose **Add file → Upload files**.
+3. Upload `index.html`, `styles.css`, and `app.js` into the repository root.
+4. Replace the existing `index.html` and `styles.css` if prompted. Keep other server/backend files.
+5. Commit the changes and wait for Netlify to deploy.
 
-The page is a front-end demo. Projects are saved in the current browser on the current device; it does not yet include real accounts, cloud saving, or payments.
+The 3D view loads Three.js from a CDN, so the browser needs an internet connection. This is a front-end starter editor, not yet a full game engine; saved scenes are stored in the browser on the same device, and there are no accounts or payments yet.
