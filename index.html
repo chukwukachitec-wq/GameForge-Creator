@@ -1,65 +1,59 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GameForge Creator — 3D Studio</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="app.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GameForge Creator</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#"><span class="brand-mark">G</span><span>GameForge <em>Creator</em></span></a>
-    <div class="top-actions"><span class="save-status" id="saveStatus">● Ready</span><button class="btn btn-quiet" id="saveBtn">Save</button><button class="btn btn-primary" id="playBtn">▶ Play preview</button></div>
-  </header>
-  <main class="layout">
-    <aside class="sidebar">
-      <div class="side-title">YOUR STUDIO</div>
-      <button class="nav-item active" data-mode="world"><span>◇</span> World Builder</button>
-      <button class="nav-item" data-mode="adventure"><span>♙</span> Adventure Game</button>
-      <button class="nav-item" data-mode="racing"><span>▰</span> Racing Game</button>
-      <div class="side-divider"></div>
-      <div class="side-title">SCENE OBJECTS</div>
-      <div id="objectList" class="object-list"><p class="empty-list">Your objects will appear here.</p></div>
-      <div class="sidebar-bottom"><div class="mini-icon">✦</div><div><strong>GameForge 3D</strong><small>Starter studio</small></div></div>
-    </aside>
-    <section class="editor">
-      <div class="editor-head">
-        <div><p class="eyebrow">3D GAME STUDIO</p><h1 id="modeTitle">World Builder</h1><p id="modeDescription">Place objects and shape your own 3D world.</p></div>
-        <div class="mode-chip"><span class="live-dot"></span> 3D workspace</div>
-      </div>
-      <div class="viewport-wrap">
-        <div class="viewport-toolbar"><span><i class="tiny-dot"></i> SCENE VIEW</span><div><button class="tool-btn" id="resetCamera" title="Reset camera">◎ Reset view</button><button class="tool-btn" id="clearBtn" title="Clear added objects">Clear objects</button></div></div>
-        <div id="viewport" aria-label="Interactive 3D scene"></div>
-        <div class="view-help" id="viewHelp">Drag to orbit · Scroll to zoom · Tap an object to select it</div>
-        <div class="preview-banner" id="previewBanner" hidden>Preview mode — press “Stop preview” to edit again</div>
-      </div>
-      <div class="bottom-bar"><span><span class="live-dot"></span> Scene ready</span><span id="objectCount">0 objects added</span><span>Tip: choose an object below to add it</span></div>
-    </section>
-    <aside class="inspector">
-      <div class="panel-heading"><div><p class="eyebrow">BUILD TOOLS</p><h2>Add to world</h2></div><span class="plus-badge">+</span></div>
-      <p class="panel-copy">Pick an object to place it in your 3D scene.</p>
-      <div class="add-grid">
-        <button class="add-card" data-object="cube"><span class="object-icon cube-icon">▧</span><strong>Block</strong><small>Basic shape</small></button>
-        <button class="add-card" data-object="tree"><span class="object-icon tree-icon">♣</span><strong>Tree</strong><small>Nature</small></button>
-        <button class="add-card" data-object="rock"><span class="object-icon rock-icon">◆</span><strong>Rock</strong><small>Obstacle</small></button>
-        <button class="add-card" data-object="coin"><span class="object-icon coin-icon">●</span><strong>Coin</strong><small>Collectible</small></button>
-        <button class="add-card" data-object="car"><span class="object-icon car-icon">▰</span><strong>Car</strong><small>Racing</small></button>
-        <button class="add-card" data-object="player"><span class="object-icon player-icon">♙</span><strong>Player</strong><small>Character</small></button>
-      </div>
-      <div class="side-divider"></div>
-      <div class="panel-heading"><div><p class="eyebrow">SELECTED ITEM</p><h2 id="selectedName">Nothing selected</h2></div></div>
-      <p class="panel-copy" id="selectedHint">Tap an object in the scene or add a new one.</p>
-      <div class="move-controls">
-        <button class="move-btn" data-move="z-">↑<small>Forward</small></button>
-        <div class="move-row"><button class="move-btn" data-move="x-">←<small>Left</small></button><button class="move-btn" data-move="x+">→<small>Right</small></button></div>
-        <button class="move-btn" data-move="z+">↓<small>Back</small></button>
-      </div>
-      <button class="btn btn-danger" id="deleteBtn" disabled>Delete selected object</button>
-      <div class="hint-card"><span>💡</span><p><strong>How to build</strong><br>Choose a game type, add objects, tap an object to select it, then use the arrows to move it around.</p></div>
-    </aside>
-  </main>
-  <div class="toast" id="toast" hidden></div>
+<header>
+  <div class="brand"><span class="logo">◆</span><div><h1>GameForge Creator</h1><p>Build it. Play it. Export it.</p></div></div>
+  <div class="top-actions"><button id="newBtn" class="secondary">New project</button><button id="exportZipBtn" class="primary">Export Project ZIP</button></div>
+</header>
+<main>
+  <aside class="panel tools">
+    <h2>Build your world</h2>
+    <label for="objectType">Object to add</label>
+    <select id="objectType">
+      <option value="player">Player</option>
+      <option value="building">Building</option>
+      <option value="house">House</option>
+      <option value="tree">Tree</option>
+      <option value="rock">Rock</option>
+      <option value="coin">Coin</option>
+      <option value="platform">Platform</option>
+    </select>
+    <button id="addBtn" class="primary full">＋ Add object</button>
+    <button id="addBuildingBtn" class="secondary full">＋ Add building</button>
+    <p class="hint">Choose an object, then add it to the scene. Select an object on the canvas to move or delete it.</p>
+    <hr>
+    <h3>Selected object</h3>
+    <p id="selectionInfo" class="muted">Nothing selected</p>
+    <div class="two">
+      <button id="leftBtn" class="secondary" aria-label="Move left">←</button>
+      <button id="rightBtn" class="secondary" aria-label="Move right">→</button>
+      <button id="upBtn" class="secondary" aria-label="Move up">↑</button>
+      <button id="downBtn" class="secondary" aria-label="Move down">↓</button>
+    </div>
+    <button id="deleteBtn" class="danger full">Delete selected</button>
+    <hr>
+    <h3>Game controls</h3>
+    <p class="hint">In Play mode, move the player with the arrow keys or WASD. Collect the coins!</p>
+    <div class="button-stack">
+      <button id="playBtn" class="play full">▶ Play Game</button>
+      <button id="stopBtn" class="secondary full" disabled>■ Stop & Edit</button>
+      <button id="exportHtmlBtn" class="secondary full">⇩ Export Playable HTML</button>
+    </div>
+    <p id="status" class="status" role="status">Ready to build.</p>
+  </aside>
+  <section class="workspace">
+    <div class="workspace-head"><div><h2 id="modeTitle">Scene Editor</h2><p id="modeHint">Tap an object to select it. Drag objects to reposition.</p></div><span id="modeBadge" class="badge">EDIT MODE</span></div>
+    <div class="canvas-wrap"><canvas id="gameCanvas" width="960" height="600" aria-label="Game scene"></canvas></div>
+    <div class="canvas-footer"><span id="objectCount">0 objects</span><span>Tip: add a player and buildings, then press Play Game.</span></div>
+  </section>
+</main>
+<footer>GameForge Creator • Your project is stored in this browser while this page stays open. Export a ZIP to save it.</footer>
+<script src="app.js"></script>
 </body>
 </html>
